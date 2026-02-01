@@ -118,8 +118,8 @@ bool unique_value(int *arr, int n, int x) {
 
 int main() {
     Bst tree;
-    int root = pow(2, 15) / 2;
-    int max = pow(2, 15) - 1;
+    int root = (1 << 15) / 2; // pow() returned double, not int that would allow pure integer math 
+    int max = (1 << 15) - 1;
     vector<int> arr;
     arr.push_back(root);
     tree.insert(root);
