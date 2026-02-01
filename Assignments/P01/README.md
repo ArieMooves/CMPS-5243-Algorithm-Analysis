@@ -1,10 +1,10 @@
-### Top of the README:
+# Project Title: BST Delete
 
-### Project Title
-
-### Your name
+## Aretha Fontaine
 
 ### Project Description (It needs to be "descriptive". You can take text straight from the assignment / requirements with a little additions here and there.)
+
+### Description: The following project displays how a delete method can be implemented in a Binary Search Tree.  ....... test cases demonstrating the correctness of your delete method.
 
 ### After description:
 
