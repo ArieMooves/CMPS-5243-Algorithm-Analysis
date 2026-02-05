@@ -181,7 +181,8 @@ int main() {
      
      
      tree.print();
-     tree.saveDotFile("\n\nbst_snapshot.dot"); // Save the BST structure to a DOT file
+     cout << "\n\n";
+     tree.saveDotFile("bst_snapshot.dot"); // Save the BST structure to a DOT file
 
      Bst tree2; // create small BST for testing IPL
      tree2.insert(10);
@@ -190,8 +191,8 @@ int main() {
      tree2.insert(2);
      tree2.insert(7);
      tree2.insert(20);
+     cout << "\n\n" << "Small tree to test IPL\n";
      cout << "Internal Path Length: " << tree2.ipl() << endl ; // Calculate and print IPL
-     tree2.saveDotFile("\n\nbst_snapshot.dot");
 
 
 
