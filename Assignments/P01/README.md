@@ -7,12 +7,14 @@ The following project displays how a delete method can be implemented in a Binar
 |   #   | File             | Description                                        |
 | :---: | ---------------- | -------------------------------------------------- |
 |   1   | [bst.cpp](https://github.com/ArieMooves/CMPS-5243-Algorithm-Analysis/blob/main/Assignments/P01/bst.cpp)        | Binary Search Tree original code with 'delete' method inserted.    |
+|   2   | [graphs](https://github.com/ArieMooves/CMPS-5243-Algorithm-Analysis/tree/main/Assignments/P01/graphs) | This folder contains dot files of the various generated graphs. |
+|   3   | [GraphShots](https://github.com/ArieMooves/CMPS-5243-Algorithm-Analysis/tree/main/Assignments/P01/GraphShots) | This folder contains snapshots of the various generated graphs. | 
 
 
 
 ### Instructions:
 
-### GitHub Codespace: Taking the following steps allows bst to be executable
-###                   /workspaces/CMPS-5243-Algorithm-Analysis/Assignments/P01
-###                   $ g++ bst.cpp -o bst
-###                   $ ./bst
+GitHub Codespace: Taking the following steps allows bst to be executable
+                  /workspaces/CMPS-5243-Algorithm-Analysis/Assignments/P01
+                   $ g++ bst.cpp -o bst
+                  $ ./bst
