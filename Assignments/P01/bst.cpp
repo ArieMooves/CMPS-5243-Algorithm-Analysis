@@ -191,14 +191,23 @@ int main() {
      tree2.insert(7);
      tree2.insert(20);
      cout << "Internal Path Length: " << tree2.ipl() << endl ; // Calculate and print IPL
+     tree2.saveDotFile("\n\nbst_snapshot.dot");
+
+
 
      Bst emptytree; // create empty BST for testing deletion from empty tree
      cout << "\n\nBefore delete (empty tree):\n";
      emptytree.print(); // should print nothing
-
+     
+     
      emptytree.deleteNode(10); //delete from an empty tree
+     cout << "\nAfter delete:\n";
+     emptytree.print();
+     cout << "\n";
      emptytree.saveDotFile("empty_tree.dot"); // Save empty tree to DOT file
      cout << "Internal Path Length: " << emptytree.ipl() << endl; // Calculate and print IPL
+
+
 
      Bst singleNodeTree; // create single node BST for testing deletion
      singleNodeTree.insert(10); // insert single node
@@ -208,8 +217,10 @@ int main() {
      singleNodeTree.deleteNode(10); // delete the only node
      cout << "\nAfter delete:\n";
      singleNodeTree.print(); // should print nothing
+     cout << "\n";
      singleNodeTree.saveDotFile("single_node_tree.dot"); // Save single node tree to DOT file
      cout << "Internal Path Length: " << singleNodeTree.ipl() << endl; // Calculate and print IPL
+
 
      Bst MultiNodeTree; // create multi-node BST for testing deletion
      MultiNodeTree.insert(22);
@@ -218,14 +229,17 @@ int main() {
      MultiNodeTree.insert(3);
      MultiNodeTree.insert(29);
      MultiNodeTree.insert(1);
+     
      cout << "\n\nBefore delete (multi-node):\n";
      MultiNodeTree.print();
 
      MultiNodeTree.deleteNode(1); // delete a leaf node
      cout << "\nAfter delete:\n";
      MultiNodeTree.print();
+     cout << "\n";
      MultiNodeTree.saveDotFile("multi_node_tree.dot"); // Save multi-node tree to DOT file
      cout << "Internal Path Length: " << MultiNodeTree.ipl() << endl; // Calculate and print IPL
+
 
      Bst removal; // create small BST for testing deletion with two children
      removal.insert(10);
@@ -237,9 +251,14 @@ int main() {
 
      cout << "\nBefore delete (two children):\n";
      removal.print();
+
      removal.deleteNode(10);
      cout << "\nAfter delete:\n";
      removal.print();
+     cout << "\n";
+     removal.saveDotFile("deletion_two_children.dot"); // Save tree after deletion to DOT file
+     cout << "Internal Path Length: " << removal.ipl() << endl; // Calculate and print IPL
+
 
      Bst removal2; // create small BST for testing deletion with one child
      removal2.insert(10);
@@ -251,9 +270,14 @@ int main() {
 
      cout << "\n\nBefore delete (one child):\n";
      removal2.print();
+
      removal2.deleteNode(15);
      cout << "\nAfter delete:\n";
      removal2.print();
+     cout << "\n";
+     removal2.saveDotFile("deletion_one_child.dot"); // Save tree after deletion to DOT file
+     cout << "Internal Path Length: " << removal2.ipl() << endl; // Calculate and print IPL
+
 
      Bst removal3; // create small BST for testing deletion of leaf node
      removal3.insert(10);
@@ -265,9 +289,14 @@ int main() {
 
      cout << "\n\nBefore delete (Leaf Node):\n";
      removal3.print();
+
      removal3.deleteNode(20);
-     cout << "\nAfter delete:\n";
+     cout << "\nAfter delete:\n";  
      removal3.print();
+     cout << "\n";
+     removal3.saveDotFile("deletion_leaf_node.dot"); // Save tree after deletion to DOT file
+     cout << "Internal Path Length: " << removal3.ipl() << endl; // Calculate and print IPL
+     
    
      return 0;
 }
