@@ -15,6 +15,6 @@ The following project displays how a delete method can be implemented in a Binar
 ### Instructions:
 
 GitHub Codespace: Taking the following steps allows bst to be executable
-                  /workspaces/CMPS-5243-Algorithm-Analysis/Assignments/P01
-                   $ g++ bst.cpp -o bst
+                  /workspaces/CMPS-5243-Algorithm-Analysis/Assignments/P01 -->
+                   $ g++ bst.cpp -o bst -->
                   $ ./bst
