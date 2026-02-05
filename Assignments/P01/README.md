@@ -20,6 +20,7 @@ GitHub Codespace: Taking the following steps allows bst to be executable
                    $ ./bst
                    
 Credits: 
-YouTube --> Bro Code, Hello Byte 
-AI model --> ChatGpt
-IDE --> VS studio (auto code generation)
+| source | Comments |
+|YouTube | Bro Code, Hello Byte |
+|AI model | ChatGpt |
+|IDE | VS studio (auto code generation) |
