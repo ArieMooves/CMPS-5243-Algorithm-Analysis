@@ -182,7 +182,7 @@ int main() {
      
      tree.print();
      cout << "\n\n";
-     tree.saveDotFile("bst_snapshot.dot"); // Save the BST structure to a DOT file
+     tree.saveDotFile("graphs/bst_snapshot.dot"); // Save the BST structure to a DOT file
 
      Bst tree2; // create small BST for testing IPL
      tree2.insert(10);
@@ -205,7 +205,7 @@ int main() {
      cout << "\nAfter delete:\n";
      emptytree.print();
      cout << "\n";
-     emptytree.saveDotFile("empty_tree.dot"); // Save empty tree to DOT file
+     emptytree.saveDotFile("graphs/empty_tree.dot"); // Save empty tree to DOT file
      cout << "Internal Path Length: " << emptytree.ipl() << endl; // Calculate and print IPL
 
 
@@ -219,7 +219,7 @@ int main() {
      cout << "\nAfter delete:\n";
      singleNodeTree.print(); // should print nothing
      cout << "\n";
-     singleNodeTree.saveDotFile("single_node_tree.dot"); // Save single node tree to DOT file
+     singleNodeTree.saveDotFile("graphs/single_node_tree.dot"); // Save single node tree to DOT file
      cout << "Internal Path Length: " << singleNodeTree.ipl() << endl; // Calculate and print IPL
 
 
@@ -238,7 +238,7 @@ int main() {
      cout << "\nAfter delete:\n";
      MultiNodeTree.print();
      cout << "\n";
-     MultiNodeTree.saveDotFile("multi_node_tree.dot"); // Save multi-node tree to DOT file
+     MultiNodeTree.saveDotFile("graphs/multi_node_tree.dot"); // Save multi-node tree to DOT file
      cout << "Internal Path Length: " << MultiNodeTree.ipl() << endl; // Calculate and print IPL
 
 
@@ -257,7 +257,7 @@ int main() {
      cout << "\nAfter delete:\n";
      removal.print();
      cout << "\n";
-     removal.saveDotFile("deletion_two_children.dot"); // Save tree after deletion to DOT file
+     removal.saveDotFile("graphs/deletion_two_children.dot"); // Save tree after deletion to DOT file
      cout << "Internal Path Length: " << removal.ipl() << endl; // Calculate and print IPL
 
 
@@ -276,7 +276,7 @@ int main() {
      cout << "\nAfter delete:\n";
      removal2.print();
      cout << "\n";
-     removal2.saveDotFile("deletion_one_child.dot"); // Save tree after deletion to DOT file
+     removal2.saveDotFile("graphs/deletion_one_child.dot"); // Save tree after deletion to DOT file
      cout << "Internal Path Length: " << removal2.ipl() << endl; // Calculate and print IPL
 
 
@@ -295,7 +295,7 @@ int main() {
      cout << "\nAfter delete:\n";  
      removal3.print();
      cout << "\n";
-     removal3.saveDotFile("deletion_leaf_node.dot"); // Save tree after deletion to DOT file
+     removal3.saveDotFile("graphs/deletion_leaf_node.dot"); // Save tree after deletion to DOT file
      cout << "Internal Path Length: " << removal3.ipl() << endl; // Calculate and print IPL
      
    
