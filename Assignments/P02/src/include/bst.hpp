@@ -21,7 +21,7 @@ protected:
     };
 
     Node *root;
-    Counters counters;
+    mutable Counters counters;
 
     // Recursive insert helper
     bool insert(Node *&node, int value) {
