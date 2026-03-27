@@ -42,6 +42,15 @@ public:
         return counters;
     }
 
+    void print() const {
+        Node *curr = head;
+        while (curr) {
+            std::cout << curr->data << " ";
+            curr = curr->next;
+        }
+        std::cout << "\n";
+    }
+
     // INSERT
     bool insert(int value) {
         counters.inserts++;
