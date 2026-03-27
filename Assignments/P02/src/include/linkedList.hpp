@@ -14,7 +14,7 @@ private:
 
     Node *head;
     std::size_t count;
-    Counters counters;
+    mutable Counters counters;
 
 public:
     LinkedList() : head(nullptr), count(0) {}
