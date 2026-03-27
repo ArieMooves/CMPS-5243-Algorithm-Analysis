@@ -1,9 +1,9 @@
 // run_workload.cpp
-#include "../include/bst.hpp"
-#include "../include/avl.hpp"
-#include "../include/hashTables.hpp"
-#include "../include/LinkedList.hpp"
-#include "../include/sortedArraySet.hpp"
+#include "bst.hpp"
+#include "avl.hpp"
+#include "hashTables.hpp"
+#include "LinkedList.hpp"
+#include "sortedArraySet.hpp"
 
 #include <iostream>
 #include <fstream>
