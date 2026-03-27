@@ -10,7 +10,7 @@ private:
     std::size_t count;
     std::size_t capacity;
 
-    Counters counters;
+    mutable Counters counters;
 
     // Resize array
     void resize(std::size_t newCapacity) {
