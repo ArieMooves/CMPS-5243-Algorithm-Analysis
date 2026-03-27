@@ -15,9 +15,10 @@ protected:
         int data;
         Node *left;
         Node *right;
+        int height;  // REQUIRED for AVL
 
         explicit Node(int value)
-            : data(value), left(nullptr), right(nullptr) {}
+            : data(value), left(nullptr), right(nullptr), height(1) {}
     };
 
     Node *root;
