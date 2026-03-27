@@ -1,7 +1,7 @@
 // run_workload.cpp
 #include "bst.hpp"
 #include "avl.hpp"
-#include "hashTables.hpp"
+#include "hashTable.hpp"
 #include "LinkedList.hpp"
 #include "sortedArraySet.hpp"
 
