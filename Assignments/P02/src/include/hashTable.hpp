@@ -8,7 +8,7 @@ private:
     std::vector<std::vector<int>> table;
     std::size_t capacity;
     std::size_t count;
-    Counters counters;
+    mutable Counters counters;
 
     const double LOAD_FACTOR = 0.75;
 
