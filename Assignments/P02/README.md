@@ -1,5 +1,5 @@
 ## Comparing Lookup Type Data Structures
-Conclusion
+
 Hashtables are best for large insert-heavy and lookup-heavy workloads and outperform the other structures. AVL trees perform more rotations than BSTs, which are fast for small datasets, ensuring balanced height and predictable performance. LinkedLists perform poorly with lookups, and SortedArraySets have great overhead for insert/delete, despite its quick search. There are limits with Hashtables, however they produced the best outcomes with the workloads provided.
 
 ### Workload: workload_D_10000.json
