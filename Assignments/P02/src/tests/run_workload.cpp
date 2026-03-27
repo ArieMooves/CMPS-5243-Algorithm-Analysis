@@ -2,7 +2,7 @@
 #include "bst.hpp"
 #include "avl.hpp"
 #include "hashTable.hpp"
-#include "LinkedList.hpp"
+#include "linkedList.hpp"
 #include "sortedArraySet.hpp"
 
 #include <iostream>
