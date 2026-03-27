@@ -6,7 +6,7 @@
 class SortedArraySet {
 private:
     int *data;
-    std::size_t count;
+    std::size_t count;     // <-- acts as the counter
     std::size_t capacity;
 
     void resize(std::size_t newCapacity) {
@@ -46,8 +46,10 @@ public:
 
     ~SortedArraySet() {
         delete[] data;
+        count = 0; // optional cleanup
     }
 
+    // O(1) size access (same idea as counter in other structures)
     std::size_t size() const {
         return count;
     }
@@ -62,30 +64,29 @@ public:
         }
 
         std::size_t pos = lowerBound(value);
-
         return pos < count && data[pos] == value;
     }
 
     bool insert(int value) {
         std::size_t pos = lowerBound(value);
 
-        // Duplicate guard: do not insert if already present
+        // Duplicate guard
         if (pos < count && data[pos] == value) {
             return false;
         }
 
-        // Grow array if full
+        // Resize if needed
         if (count == capacity) {
             resize(capacity * 2);
         }
 
-        // Shift elements right to make room
+        // Shift elements right
         for (std::size_t i = count; i > pos; i--) {
             data[i] = data[i - 1];
         }
 
         data[pos] = value;
-        count++;
+        count++;   // <-- increment counter
 
         return true;
     }
@@ -101,13 +102,13 @@ public:
             return false;
         }
 
-        // Eager delete:
-        // shift everything left immediately to close the gap
+        // Shift elements left
         for (std::size_t i = pos; i + 1 < count; i++) {
             data[i] = data[i + 1];
         }
 
-        count--;
+        count--;   // <-- decrement counter
+
         return true;
     }
 
