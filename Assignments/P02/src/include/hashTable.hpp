@@ -1,76 +1,118 @@
 #pragma once
 
-#include <cstddef>
+#include "counters.hpp"
 #include <vector>
 
 class HashTable {
 private:
     std::vector<std::vector<int>> table;
     std::size_t capacity;
-    std::size_t counter;  // Tracks number of elements
+    std::size_t count;
+    Counters counters;
 
-    // Integer hash function
+    const double LOAD_FACTOR = 0.75;
+
     std::size_t hash(int key) const {
         return static_cast<std::size_t>(key) * 2654435761u;
     }
 
-    // Compress hash value into a valid bucket index
     std::size_t indexFor(int key) const {
         return hash(key) % capacity;
     }
 
-public:
-    explicit HashTable(std::size_t cap = 101)
-        : table(cap), capacity(cap), counter(0) {}
+    //Resize 
+    void resize() {
+        counters.resize_events++;
+        counters.structural_ops++;
 
-    bool insert(int key) {
-        std::size_t idx = indexFor(key);
-        auto &bucket = table[idx];
+        std::size_t newCap = capacity * 2;
+        std::vector<std::vector<int>> newTable(newCap);
 
-        // Ignore duplicates
-        for (int value : bucket) {
-            if (value == key) {
-                return false;
+        for (auto &bucket : table) {
+            for (int val : bucket) {
+                std::size_t idx = hash(val) % newCap;
+                newTable[idx].push_back(val);
             }
         }
 
+        table = std::move(newTable);
+        capacity = newCap;
+    }
+
+public:
+    explicit HashTable(std::size_t cap = 7)
+        : table(cap), capacity(cap), count(0) {}
+
+    void reset() {
+        table.clear();
+        table.resize(7);
+        capacity = 7;
+        count = 0;
+    }
+
+    void reset_counters() {
+        counters = Counters{};
+    }
+
+    Counters getCounters() {
+        return counters;
+    }
+
+    bool insert(int key) {
+        counters.inserts++;
+
+        if ((double)count / capacity >= LOAD_FACTOR) {
+            resize();
+        }
+
+        std::size_t idx = indexFor(key);
+        auto &bucket = table[idx];
+
+        for (int val : bucket) {
+            counters.comparisons++;
+            if (val == key)
+                return false;
+        }
+
+        counters.structural_ops++;
         bucket.push_back(key);
-        counter++;  // increment count
+        count++;
         return true;
     }
 
-    bool contains(int key) const {
-        std::size_t idx = indexFor(key);
-        const auto &bucket = table[idx];
+    bool contains(int key) {
+        counters.lookups++;
 
-        for (int value : bucket) {
-            if (value == key) {
+        std::size_t idx = indexFor(key);
+        auto &bucket = table[idx];
+
+        for (int val : bucket) {
+            counters.comparisons++;
+            if (val == key)
                 return true;
-            }
         }
 
         return false;
     }
 
     bool erase(int key) {
+        counters.deletes++;
+
         std::size_t idx = indexFor(key);
         auto &bucket = table[idx];
 
         for (std::size_t i = 0; i < bucket.size(); i++) {
+            counters.comparisons++;
+
             if (bucket[i] == key) {
-                // swap-pop delete: fast, order not preserved
+                counters.structural_ops++;
                 bucket[i] = bucket.back();
                 bucket.pop_back();
-                counter--;  // decrement count
+                count--;
                 return true;
             }
         }
 
         return false;
-    }
-
-    // Returns number of elements in the hash table
-    std::size_t size() const {
-        return counter;
     }
 };
