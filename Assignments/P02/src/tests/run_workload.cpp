@@ -1,62 +1,93 @@
-#include "bst.hpp"
-#include "avl.hpp"
-#include "hashTables.hpp"
-#include "LinkedList.hpp"
-#include "sortedArraySet.hpp"
+// run_workload.cpp
+#include "../include/bst.hpp"
+#include "../include/avl.hpp"
+#include "../include/hashTables.hpp"
+#include "../include/LinkedList.hpp"
+#include "../include/sortedArraySet.hpp"
+
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "workload_generator.cpp"  
+#include <iomanip>  // for table formatting
+#include "json.hpp" // make sure this is available as nlohmann::json
+
+using json = nlohmann::json;
+using namespace std;
+
+// Helper function to run workload on a container
+template <typename Container>
+Counters runOps(Container &c, const json &workload) {
+    c.reset(); // reset counters
+
+    for (const auto &op : workload) {
+        int value = op["value"];
+        string action = op["op"];
+
+        if (action == "insert") {
+            c.insert(value);
+        } else if (action == "delete") {
+            c.erase(value);
+        } else if (action == "lookup") {
+            c.contains(value);
+        }
+    }
+
+    return c.getCounters();
+}
 
 int main() {
-    
-    std::string filename = "workload.json";
-    generateWorkload(filename, 1000); // pseudo-function from workload_generator
+    string filename = "workload.json";
 
-    // Create structures
+    // Check if file exists
+    ifstream f(filename);
+    if (!f) {
+        cerr << "Error: Could not open " << filename << endl;
+        return 1;
+    }
+
+    json workload;
+    f >> workload;
+
+    // Initialize all data structures
     Bst bst;
     Avl avl;
     HashTable ht(101);
     LinkedList ll;
     SortedArraySet sas;
 
-    // Load workload
-    std::ifstream f(filename);
-    nlohmann::json j;
-    f >> j;
+    // Run workload on each structure and collect counters
+    Counters bstC = runOps(bst, workload);
+    Counters avlC = runOps(avl, workload);
+    Counters htC  = runOps(ht, workload);
+    Counters llC  = runOps(ll, workload);
+    Counters sasC = runOps(sas, workload);
 
-    // Run operations
-    for (auto &op : j) {
-        int value = op["value"];
-        std::string action = op["op"];
+    // Print table header
+    cout << left << setw(15) << "Structure"
+         << setw(15) << "Comparisons"
+         << setw(15) << "StructOps"
+         << setw(15) << "Inserts"
+         << setw(15) << "Deletes"
+         << setw(15) << "Lookups"
+         << setw(15) << "ResizeEv"
+         << endl;
 
-        if (action == "insert") {
-            bst.insert(value);
-            avl.insert(value);
-            ht.insert(value);
-            ll.insert(value);
-            sas.insert(value);
-        } else if (action == "delete") {
-            bst.erase(value);
-            avl.erase(value);
-            ht.erase(value);
-            ll.erase(value);
-            sas.erase(value);
-        } else if (action == "lookup") {
-            bst.contains(value);
-            avl.contains(value);
-            ht.contains(value);
-            ll.contains(value);
-            sas.contains(value);
-        }
-    }
+    auto printCounters = [](const string &name, const Counters &c) {
+        cout << left << setw(15) << name
+             << setw(15) << c.comparisons
+             << setw(15) << c.structural_ops
+             << setw(15) << c.inserts
+             << setw(15) << c.deletes
+             << setw(15) << c.lookups
+             << setw(15) << c.resize_events
+             << endl;
+    };
 
-    // Print counters 
-    std::cout << "BST: " << bst.getCounters() << std::endl;
-    std::cout << "AVL: " << avl.getCounters() << std::endl;
-    std::cout << "HashTable size: " << ht.size() << std::endl;
-    std::cout << "LinkedList size: " << ll.size() << std::endl;
-    std::cout << "SortedArraySet size: " << sas.size() << std::endl;
+    printCounters("BST", bstC);
+    printCounters("AVL", avlC);
+    printCounters("HashTable", htC);
+    printCounters("LinkedList", llC);
+    printCounters("SortedArray", sasC);
 
     return 0;
 }
