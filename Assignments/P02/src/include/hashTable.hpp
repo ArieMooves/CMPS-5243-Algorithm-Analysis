@@ -7,6 +7,7 @@ class HashTable {
 private:
     std::vector<std::vector<int>> table;
     std::size_t capacity;
+    std::size_t counter;  // Tracks number of elements
 
     // Integer hash function
     std::size_t hash(int key) const {
@@ -20,7 +21,7 @@ private:
 
 public:
     explicit HashTable(std::size_t cap = 101)
-        : table(cap), capacity(cap) {}
+        : table(cap), capacity(cap), counter(0) {}
 
     bool insert(int key) {
         std::size_t idx = indexFor(key);
@@ -34,6 +35,7 @@ public:
         }
 
         bucket.push_back(key);
+        counter++;  // increment count
         return true;
     }
 
@@ -59,10 +61,16 @@ public:
                 // swap-pop delete: fast, order not preserved
                 bucket[i] = bucket.back();
                 bucket.pop_back();
+                counter--;  // decrement count
                 return true;
             }
         }
 
         return false;
+    }
+
+    // Returns number of elements in the hash table
+    std::size_t size() const {
+        return counter;
     }
 };
