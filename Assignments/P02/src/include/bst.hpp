@@ -39,7 +39,7 @@ protected:
     };
 
     Node *root;
-    Counters c{};
+    Counters counters;
 
     // Recursive insert helper
     bool insert(Node *&node, int value)
