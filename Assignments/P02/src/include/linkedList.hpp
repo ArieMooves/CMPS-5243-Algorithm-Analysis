@@ -10,9 +10,10 @@ private:
     };
 
     Node *head;
+    std::size_t counter;  // Tracks number of elements
 
 public:
-    LinkedList() : head(nullptr) {}
+    LinkedList() : head(nullptr), counter(0) {}
 
     ~LinkedList() {
         Node *curr = head;
@@ -22,10 +23,11 @@ public:
             curr = curr->next;
             delete temp;
         }
+
+        counter = 0; 
     }
 
     bool insert(int value) {
-
         if (contains(value))
             return false;
 
@@ -34,6 +36,7 @@ public:
         n->next = head;
         head = n;
 
+        counter++;  // increment count
         return true;
     }
 
@@ -63,6 +66,7 @@ public:
                     head = curr->next;
 
                 delete curr;
+                counter--;  // decrement count
                 return true;
             }
 
@@ -82,5 +86,10 @@ public:
         }
 
         std::cout << "\n";
+    }
+
+    // Returns number of elements
+    std::size_t size() const {
+        return counter;
     }
 };
